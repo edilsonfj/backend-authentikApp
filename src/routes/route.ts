@@ -1,7 +1,12 @@
 import { Router } from "express";
+import { CreateUserController } from "../controllers/create_user.controller";
+import { CreateUserUseCase } from "../usecases/create_user.usecase";
 
-export const router = Router();
+const createUserUseCase = new CreateUserUseCase();
+const createUserController = new CreateUserController(createUserUseCase);
 
-router.get("/", (req, res) => {
-    return res.json({ message: "Hello World!" });
-})
+const router = Router();
+
+router.post("/create-user", createUserController.createUser.bind(createUserController));
+
+export { router }
