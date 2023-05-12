@@ -1,5 +1,5 @@
 import { prisma } from "../database/prisma";
-import { User } from "../entitys/user.entity";
+import { User } from "../entities/user.entity";
 import { v4 as uuidv4 } from 'uuid';
 
 export class UserRepository {

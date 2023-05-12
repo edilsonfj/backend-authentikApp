@@ -1,18 +1,19 @@
-import { CreateUserDto } from "../dtos/create_user.dto";
-import { User } from "../entitys/user.entity";
-import { v4 as uuidv4 } from 'uuid';
+import { UserRepository } from "../repositories/user.repository";
+import { User } from "../entities/user.entity";
 
 export class CreateUserUseCase {
-    constructor() { }
+    constructor(private readonly userRepository: UserRepository) { }
 
-    async createUser(createUserDto: CreateUserDto): Promise<User> {
-        const user = new User(
-            uuidv4(),
-            createUserDto.name,
-            createUserDto.phone,
-            createUserDto.email,
-            createUserDto.password
-        );
+    async execute(userData: User): Promise<User> {
+
+        const userExists = await this.userRepository.findUserByEmail(userData.email)
+
+        if (userExists) {
+            throw new Error('Usuário já cadastrado!')
+        }
+
+        const user = await this.userRepository.createUser(userData);
+
         return user;
     }
 }
