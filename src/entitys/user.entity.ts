@@ -1,22 +1,20 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export class User {
     id: string;
     name: string;
-    phone: number;
+    phone: string;
     email: string;
     password: string;
-    readonly createdAt: Date;
+    createdAt: Date;
     updatedAt: Date | null;
 
     constructor(
-        id: string = uuidv4(),
+        id: string,
         name: string,
-        phone: number,
+        phone: string,
         email: string,
         password: string,
-        createdAt: Date = new Date(),
-        updatedAt: Date | null = null
+        createdAt: Date,
+        updatedAt: Date | null
     ) {
         this.id = id;
         this.name = name;
