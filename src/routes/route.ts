@@ -27,4 +27,8 @@ router.delete('/delete-user/:id', (req, res) => {
     new DeleteUserController().deleteUser(req, res)
 })
 
+router.all('*', (req, res) => {
+    res.status(404).send('404 Page Not Found');
+})
+
 export { router }
